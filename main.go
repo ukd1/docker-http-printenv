@@ -8,14 +8,6 @@ import (
 	"strings"
 )
 
-type envs struct {
-	items env_item
-}
-type env_item struct {
-	key   string `json:"key"`
-	value string `json:"value"`
-}
-
 func main() {
 	port := "8080"
 	if os.Getenv("PORT") != "" {
@@ -26,5 +18,6 @@ func main() {
 		fmt.Fprintf(w, "%s", strings.Join(os.Environ(), "\n"))
 	})
 
+	log.Println("Starting on port", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
